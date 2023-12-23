@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math"
+	"os"
+	"bufio"
 )
 
 func main() {
@@ -11,13 +13,13 @@ func main() {
 	const inflationRate = 2.5
 
 	fmt.Println("Enter investment amount: ")
-	fmt.Scan(&investmentAmount) // & pointer to the var
+	fmt.Scanln(&investmentAmount) // & pointer to the var
 
 	fmt.Println("Enter years: ")
-	fmt.Scan(&years)
+	fmt.Scanln(&years)
 
 	fmt.Println("Enter expected return rate: ")
-	fmt.Scan(&expectedReturnRate)
+	fmt.Scanln(&expectedReturnRate)
 
 	futureValue := investmentAmount * math.Pow(1+expectedReturnRate/100, years)
 	futureRealValue := futureValue / math.Pow(1+inflationRate/100, years)
@@ -27,6 +29,14 @@ func main() {
 	
 	fmt.Println("Future real value: ")
 	fmt.Println(futureRealValue)
+
+	fmt.Println("Press ENTER to exit...")
+	waitForEnter()
+}
+
+func waitForEnter() {
+	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Scan() // Wait for input
 }
 
 // go mod init github.com/yourname/yourrepo
